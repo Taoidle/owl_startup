@@ -61,6 +61,8 @@ if __name__ == '__main__':
             "camera_2_VideoCaptureAPI": camera_videocapture_api,
             "camera_2_w": camera_w,
             "camera_2_h": camera_h,
+            "cmd_nmcli_path": "nmcli",
+            "cmd_bash_path": "/bin/bash",
             "embedWebServer": {
                 "doc_root": "./html",
                 "index_file_of_root": "index.html",
