@@ -1,0 +1,13 @@
+[Unit]
+Description=Owl Apriltag Server
+After=owl-terminal.service
+
+[Service]
+ExecStart=/usr/bin/OwlAprilTagProcessor -c /etc/owl/owl_apriltag_config.json
+Type=idle
+KillMode=control-group
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+Alias=apriltag.service
