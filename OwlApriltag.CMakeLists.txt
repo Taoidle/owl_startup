@@ -72,6 +72,8 @@ link_libraries(
     opencv_ximgproc
     opencv_xobjdetect
     opencv_xphoto
+    apriltag
+    apriltag-utils
 )
 
 set(DEBUG_BOOST_ASIO OFF CACHE BOOL "DEBUG_BOOST_ASIO")
