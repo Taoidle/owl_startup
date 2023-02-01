@@ -73,27 +73,6 @@ link_libraries(
     opencv_xphoto
 )
 
-if (DEFAULT_CONFIG)
-    # ===================== vvvvvv config segment vvvvvv =================================
-
-    #set(OpenCV_DIR d:/CodeLib/opencv-4.5.5-build/)
-    set(OpenCV_DIR d:/CodeLib/opencv-4.5.5-build-install/)
-    set(OpenCV_STATIC ON)
-    set(OpenCV_WORLD ON)
-
-    set(BOOST_ROOT d:/CodeLib/boost_1_81_0_install_x64_v11p3/)
-    #set(BOOST_ROOT d:/CodeLib/boost_1_80_0_install_x64_v11p3/)
-    #set(Boost_INCLUDE_DIR d:/CodeLib/boost_1_74_0_install_x64_v11p3/include/boost-1_74)
-    #set(Boost_LIBRARY_DIR d:/CodeLib/boost_1_74_0_install_x64_v11p3/lib)
-    #set(USE_DYNAMIC_BOOST true)
-    #set(BOOST_DEBUG ON)
-    set(PROTOBUFF_INCLUDE_DIRS d:/CodeLib/protobuf-cpp-3.21.11-build-install/include/)
-    set(PROTOBUFF_LIBS d:/CodeLib/protobuf-cpp-3.21.11-build-install/lib/libprotobuf.a)
-
-    #add_definitions(-DBOOST_ASIO_ENABLE_HANDLER_TRACKING)
-
-    # ===================== ^^^^^^ config segment ^^^^^^ =================================
-endif ()
 
 message(STATUS "PROTOBUFF_INCLUDE_DIRS: ${PROTOBUFF_INCLUDE_DIRS}")
 message(STATUS "PROTOBUFF_LIBS: ${PROTOBUFF_LIBS}")
@@ -105,14 +84,6 @@ add_definitions(-Wall -Wextra -O1 -g)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
-
-#if (NOT_USE_BOOST_THEAD)
-#    set(BOOST_THEAD_MODULE "")
-#    message(STATUS "NOT_USE_BOOST_THEAD !!!")
-#else ()
-#    set(BOOST_THEAD_MODULE "thread")
-#    add_definitions(-DUSE_BOOST_THEAD)
-#endif ()
 set(BOOST_THEAD_MODULE "thread")
 add_definitions(-DUSE_BOOST_THEAD)
 
