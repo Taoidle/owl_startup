@@ -1,0 +1,137 @@
+cmake_minimum_required(VERSION 3.22)
+set(ProjectMainName OwlAprilTagProcessor)
+project(${ProjectMainName})
+
+set(CMAKE_CXX_STANDARD 20)
+
+
+include_directories(
+    "/usr/include"
+    "/usr/include/apriltag"
+    "/usr/include/opencv4"
+    "/usr/local/include/boost"
+)
+
+link_directories(
+    "/usr/lib/arm-linux-gnueabihf"
+    "/usr/local/lib"
+)
+
+link_libraries(
+    opencv_alphamat
+    opencv_aruco
+    opencv_barcode
+    opencv_bgsegm
+    opencv_bioinspired
+    opencv_calib3d
+    opencv_ccalib
+    opencv_core
+    opencv_datasets
+    opencv_dnn
+    opencv_dnn_objdetect
+    opencv_dnn_superres
+    opencv_dpm
+    opencv_face
+    opencv_features2d
+    opencv_flann
+    opencv_freetype
+    opencv_fuzzy
+    opencv_hdf
+    opencv_hfs
+    opencv_highgui
+    opencv_img_hash
+    opencv_imgcodecs
+    opencv_imgproc
+    opencv_intensity_transform
+    opencv_line_descriptor
+    opencv_mcc
+    opencv_ml
+    opencv_objdetect
+    opencv_optflow
+    opencv_phase_unwrapping
+    opencv_photo
+    opencv_plot
+    opencv_quality
+    opencv_rapid
+    opencv_reg
+    opencv_rgbd
+    opencv_saliency
+    opencv_shape
+    opencv_stereo
+    opencv_stitching
+    opencv_structured_light
+    opencv_superres
+    opencv_surface_matching
+    opencv_text
+    opencv_tracking
+    opencv_video
+    opencv_videoio
+    opencv_videostab
+    opencv_viz
+    opencv_wechat_qrcode
+    opencv_ximgproc
+    opencv_xobjdetect
+    opencv_xphoto
+)
+
+set(DEBUG_BOOST_ASIO OFF CACHE BOOL "DEBUG_BOOST_ASIO")
+set(USE_DYNAMIC_BOOST OFF CACHE BOOL "USE_DYNAMIC_BOOST")
+set(BOOST_ROOT "" CACHE PATH "BOOST_ROOT")
+
+
+if (DEBUG_BOOST_ASIO)
+    add_definitions(-DBOOST_ASIO_ENABLE_HANDLER_TRACKING)
+endif (DEBUG_BOOST_ASIO)
+
+option(USE_DYNAMIC_BOOST "Config USE_DYNAMIC_BOOST")
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(STATUS "enable -O1 when debug to resolve 'string table overflow at offset' 'too big' error on mingw")
+    # -O1 to resolve "string table overflow at offset" error on mingw
+    add_definitions(-Wall -Wextra -O1 -g)
+endif ()
+
+find_package(Threads REQUIRED)
+
+if (USE_DYNAMIC_BOOST)
+    message(STATUS "USE DYNAMIC BOOST !!!")
+    add_definitions(-DBOOST_ALL_DYN_LINK=1)
+else (USE_DYNAMIC_BOOST)
+    message(STATUS "USE STATIC BOOST !!!")
+    set(Boost_USE_STATIC_LIBS ON)
+    set(Boost_USE_STATIC_RUNTIME OFF)
+endif (USE_DYNAMIC_BOOST)
+
+find_package(Boost 1.81.0 REQUIRED COMPONENTS system filesystem program_options json log url ${BOOST_THEAD_MODULE} REQUIRED)
+
+
+message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+
+message(STATUS "Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
+message(STATUS "Boost_LIBRARY_DIRS: ${Boost_LIBRARY_DIRS}")
+message(STATUS "Boost_LIBRARIES: ${Boost_LIBRARIES}")
+message(STATUS "Boost_VERSION: ${Boost_VERSION}")
+
+
+message(STATUS "CMAKE_THREAD_LIBS_INIT: ${CMAKE_THREAD_LIBS_INIT}")
+
+add_executable(${ProjectMainName}
+        src/main.cpp
+        src/AprilTagData/AprilTagData.cpp
+        src/AprilTagData/AprilTagData.h
+        src/OwlLog/OwlLog.cpp
+        src/OwlLog/OwlLog.h
+        src/GetImage/GetImage.cpp
+        src/GetImage/GetImage.h
+        src/SendResult/SendResult.cpp
+        src/SendResult/SendResult.h
+        src/TagProcessor/TagProcessor.cpp
+        src/TagProcessor/TagProcessor.h
+        src/ConfigLoader/TagConfigLoader.cpp
+        src/ConfigLoader/TagConfigLoader.h)
+
+target_link_libraries(${ProjectMainName} ${CMAKE_THREAD_LIBS_INIT})
+
+include_directories(${Boost_INCLUDE_DIRS})
+target_link_libraries(${ProjectMainName} ${Boost_LIBRARIES})
+link_directories(${Boost_LIBRARY_DIRS})
