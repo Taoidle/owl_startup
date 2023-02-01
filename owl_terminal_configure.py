@@ -5,7 +5,7 @@ CM_W = 800
 CM_H = 600
 VC_API = "CAP_V4L"
 FRONT_USB = "usb-1c1c000.usb-1"
-CONFIG_PATH = '/etc/owl/config.json'
+CONFIG_PATH = '/etc/owl/owl_terminal_config.json'
 
 
 def getUsbSerialNum(device: str) -> str:
@@ -30,9 +30,6 @@ def getCameraDevices() -> list:
 
 
 if __name__ == '__main__':
-    camera_w, camera_h = CM_W, CM_H
-    camera_videocapture_api = VC_API
-
     camera_devices = getCameraDevices()
     usb1_num = getUsbSerialNum(camera_devices[0])
 
@@ -54,13 +51,13 @@ if __name__ == '__main__':
             "airplane_fly_serial_baud_rate": 115200,
             "airplane_fly_serial_addr": "/dev/ttyS1",
             "camera_addr_1": front_camera,
-            "camera_1_VideoCaptureAPI": camera_videocapture_api,
-            "camera_1_w": camera_w,
-            "camera_1_h": camera_h,
+            "camera_1_VideoCaptureAPI": VC_API,
+            "camera_1_w": CM_W,
+            "camera_1_h": CM_H,
             "camera_addr_2": bottom_camera,
-            "camera_2_VideoCaptureAPI": camera_videocapture_api,
-            "camera_2_w": camera_w,
-            "camera_2_h": camera_h,
+            "camera_2_VideoCaptureAPI": VC_API,
+            "camera_2_w": CM_W,
+            "camera_2_h": CM_H,
             "downCameraId": 2,
             "cmd_nmcli_path": "nmcli",
             "cmd_bash_path": "/bin/bash",
@@ -78,13 +75,13 @@ if __name__ == '__main__':
         with open(CONFIG_PATH, 'r', encoding='utf-8') as fr:
             json_data = json.load(fr)
             json_data["camera_addr_1"] = front_camera
-            json_data["camera_1_VideoCaptureAPI"] = camera_videocapture_api
-            json_data["camera_1_w"] = camera_w
-            json_data["camera_1_h"] = camera_h
+            json_data["camera_1_VideoCaptureAPI"] = VC_API
+            json_data["camera_1_w"] = CM_W
+            json_data["camera_1_h"] = CM_H
             json_data["camera_addr_2"] = bottom_camera
-            json_data["camera_2_VideoCaptureAPI"] = camera_videocapture_api
-            json_data["camera_2_w"] = camera_w
-            json_data["camera_2_h"] = camera_h
+            json_data["camera_2_VideoCaptureAPI"] = VC_API
+            json_data["camera_2_w"] = CM_W
+            json_data["camera_2_h"] = CM_H
         with open(CONFIG_PATH, 'w', encoding='utf-8') as fw:
             json.dump(json_data, fw, ensure_ascii=False)
         fw.close()
