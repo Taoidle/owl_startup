@@ -20,7 +20,8 @@ if __name__ == '__main__':
             },
             "configAprilTagData": {
                 "resizeWidth": AP_W,
-                "resizeHeight": AP_H
+                "resizeHeight": AP_H,
+                "aprilTagDetectorMaxHammingBitsCorrected": 1
             },
             "configGetImage": {
                 "host": "127.0.0.1",
