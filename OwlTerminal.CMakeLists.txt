@@ -3,6 +3,7 @@ set(ProjectMainName OwlAccessTerminal)
 project(${ProjectMainName})
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS "-O3 -g -Wall -Wextra")
 
 include_directories(
     "/usr/include/opencv4"
@@ -79,7 +80,7 @@ message(STATUS "PROTOBUFF_LIBS: ${PROTOBUFF_LIBS}")
 
 option(USE_DYNAMIC_BOOST "Config USE_DYNAMIC_BOOST")
 
-add_definitions(-Wall -Wextra -O1 -g)
+# add_definitions(-Wall -Wextra -O1 -g)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
