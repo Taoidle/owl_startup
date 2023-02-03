@@ -6,6 +6,7 @@ ExecStartPre=/usr/bin/python3 /etc/owl/owl_terminal_configure.py
 ExecStart=/usr/bin/OwlAccessTerminal -c /etc/owl/owl_terminal_config.json
 Type=idle
 KillMode=control-group
+OOMScoreAdjust=-50
 Restart=always
 
 [Install]

@@ -6,6 +6,7 @@ After=owl-terminal.service
 ExecStart=/usr/bin/OwlAprilTagProcessor -c /etc/owl/owl_apriltag_config.json
 Type=idle
 KillMode=control-group
+OOMScoreAdjust=-50
 Restart=always
 
 [Install]
