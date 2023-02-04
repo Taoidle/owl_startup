@@ -17,15 +17,16 @@ def getUsbSerialNum(device: str) -> str:
 
 
 def getCameraDevices() -> list:
-    video_total_num = len(os.popen('ls /dev | grep video').readlines())
+    video_devices_list = os.popen('ls /dev | grep video').readlines()
+    video_total_devices_num = len(video_devices_list)
     v4l_devices_total_num = len(os.popen('ls /dev/v4l/by-id/').readlines())
-    if video_total_num % v4l_devices_total_num != 0:
-        devices_num = list(range(1, (v4l_devices_total_num + 1) * 2 - 1, 2))
-    else:
-        devices_num = list(range(v4l_devices_total_num))
     devices_list = []
-    for i in devices_num:
-        devices_list.append('/dev/video' + str(i))
+    if video_total_devices_num % v4l_devices_total_num != 0:
+        for i in range(1, (v4l_devices_total_num + 1) * 2 - 1, 2):
+            devices_list.append('/dev/' + video_devices_list[i].strip('\n'))
+    else:
+        for i in range(v4l_devices_total_num):
+            devices_list.append('/dev/' + video_devices_list[i].strip('\n'))
     return devices_list
 
 
