@@ -98,6 +98,10 @@ else ()
     set(Boost_USE_STATIC_RUNTIME OFF)
 endif ()
 
+if (DEBUG_TAG_INFO)
+    add_definitions(-DDEBUG_TAG_INFO)
+endif (DEBUG_TAG_INFO)
+
 set(Boost_USE_MULTITHREADED ON)
 find_package(Boost 1.81.0 REQUIRED COMPONENTS system filesystem program_options json log url ${BOOST_THEAD_MODULE} REQUIRED)
 
