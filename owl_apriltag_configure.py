@@ -32,7 +32,7 @@ if __name__ == '__main__':
             },
             "configSendResult": {
                 "host": "127.0.0.1",
-                "port": "23331",
+                "port": "23338",
                 "target": "/tagInfo",
                 "version": 11,
                 "timeoutMs": TIMEOUT_MS
