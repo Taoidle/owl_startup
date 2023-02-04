@@ -2,8 +2,8 @@ import os
 import json
 
 CONFIG_PATH = '/etc/owl/owl_apriltag_config.json'
-START_MS = 1000
-DURATION_MS = 300
+START_MS = 500
+DURATION_MS = 100
 TIMEOUT_MS = 1000
 TIMEOUT_COUNT = 6
 AP_W = 640
@@ -25,14 +25,14 @@ if __name__ == '__main__':
             "configGetImage": {
                 "host": "127.0.0.1",
                 "port": "23331",
-                "target": "/1",
+                "target": "/2",
                 "version": 11,
                 "timeoutMs": TIMEOUT_MS
             },
             "configSendResult": {
                 "host": "127.0.0.1",
                 "port": "23331",
-                "target": "/cmd",
+                "target": "/tagInfo",
                 "version": 11,
                 "timeoutMs": TIMEOUT_MS
             }
