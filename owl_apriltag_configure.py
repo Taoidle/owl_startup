@@ -49,6 +49,7 @@ if __name__ == '__main__':
             json_data["configTagProcessor"]["timeStartMs"] = START_MS
             json_data["configTagProcessor"]["timeDurationMs"] = DURATION_MS
             json_data["configTagProcessor"]["timeoutCountLimit"] = TIMEOUT_COUNT
+            json_data["configTagProcessor"]["timeDurationMini"] = DURATION_MINI
             json_data["configAprilTagData"]["resizeWidth"] = AP_W
             json_data["configAprilTagData"]["resizeHeight"] = AP_H
             json_data["configGetImage"]["timeoutMs"] = TIMEOUT_MS
