@@ -6,6 +6,7 @@ START_MS = 500
 DURATION_MS = 100
 TIMEOUT_MS = 1000
 TIMEOUT_COUNT = 6
+DURATION_MINI = 30
 AP_W = 640
 AP_H = 480
 
@@ -16,7 +17,8 @@ if __name__ == '__main__':
             "configTagProcessor": {
                 "timeStartMs": START_MS,
                 "timeDurationMs": DURATION_MS,
-                "timeoutCountLimit": TIMEOUT_COUNT
+                "timeoutCountLimit": TIMEOUT_COUNT,
+                "timeDurationMini": DURATION_MINI
             },
             "configAprilTagData": {
                 "resizeWidth": AP_W,
