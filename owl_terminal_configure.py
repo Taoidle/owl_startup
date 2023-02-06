@@ -60,6 +60,7 @@ if __name__ == '__main__':
             "camera_2_w": CM_W,
             "camera_2_h": CM_H,
             "downCameraId": 2,
+            "frontCameraId": 1,
             "cmd_nmcli_path": "nmcli",
             "cmd_bash_path": "/bin/bash",
             "embedWebServer": {
