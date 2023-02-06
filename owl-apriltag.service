@@ -3,6 +3,7 @@ Description=Owl Apriltag Server
 After=owl-terminal.service
 
 [Service]
+User=root
 ExecStart=/usr/bin/OwlAprilTagProcessor -c /etc/owl/owl_apriltag_config.json
 Type=idle
 KillMode=control-group
