@@ -82,6 +82,9 @@ set(DEBUG_BOOST_ASIO OFF CACHE BOOL "DEBUG_BOOST_ASIO")
 set(USE_DYNAMIC_BOOST OFF CACHE BOOL "USE_DYNAMIC_BOOST")
 set(BOOST_ROOT "" CACHE PATH "BOOST_ROOT")
 
+if (USE_AprilTagDataOpenCVImpl)
+    add_definitions(-DUSE_AprilTagDataOpenCVImpl)
+endif (USE_AprilTagDataOpenCVImpl)
 
 if (DEBUG_BOOST_ASIO)
     add_definitions(-DBOOST_ASIO_ENABLE_HANDLER_TRACKING)
