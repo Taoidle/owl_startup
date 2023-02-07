@@ -1,5 +1,6 @@
 import os
 import json
+import subprocess
 
 CM_W = 800
 CM_H = 600
@@ -9,24 +10,19 @@ CONFIG_PATH = '/etc/owl/owl_terminal_config.json'
 
 
 def getUsbSerialNum(device: str) -> str:
-    v4l_list = os.popen('v4l2-ctl -d ' + device + ' --info').readlines()
-    for i in v4l_list:
-        if "Bus info" in i:
-            return i.split(":")[1].strip()
-    return ""
-
+    return subprocess.Popen("v4l2-ctl -d " + device.strip('\n') + " --info | grep \"Bus info\" | awk '{print $4}'", shell=True,
+                            stdout=subprocess.PIPE).stdout.readline().decode('utf-8').strip('\n')
 
 def getCameraDevices() -> list:
     video_devices_list = os.popen('ls /dev | grep video').readlines()
     video_total_devices_num = len(video_devices_list)
-    v4l_devices_total_num = len(os.popen('ls /dev/v4l/by-id/').readlines())
     devices_list = []
-    if video_total_devices_num % v4l_devices_total_num != 0:
-        for i in range(1, (v4l_devices_total_num + 1) * 2 - 1, 2):
-            devices_list.append('/dev/' + video_devices_list[i].strip('\n'))
-    else:
-        for i in range(v4l_devices_total_num):
-            devices_list.append('/dev/' + video_devices_list[i].strip('\n'))
+    for i in range(len(video_devices_list) - 1):
+        item_info_1 = getUsbSerialNum('/dev/' + video_devices_list[i].strip('\n'))
+        if "usb" in item_info_1:
+            if item_info_1 == getUsbSerialNum('/dev/' + video_devices_list[i + 1]).strip('\n') and str('/dev/video' + str(i)) not in devices_list: devices_list.append('/dev/video' + str(i))
+            else:
+                if 0 <= i - 1 < video_total_devices_num and getUsbSerialNum('/dev/' + video_devices_list[i - 1]).strip('\n') == item_info_1 and str('/dev/video' + str(i + 1)) not in devices_list: devices_list.append('/dev/video' + str(i + 1))
     return devices_list
 
 
