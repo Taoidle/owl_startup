@@ -6,8 +6,9 @@ mv OwlAprilTagProcessor /usr/bin
 chmod 755 /usr/bin/OwlAprilTagProcessor
 mkdir -p /etc/owl
 mv *.py /etc/owl
-chmod 755 /etc/owl/owl_terminal_configure.py /etc/owl/owl_apriltag_configure.py
+chmod 755 /etc/owl/*.py
 python3 /etc/owl/owl_apriltag_configure.py
-mv *.service /etc/systemd/system/
-chmod 777 /etc/systemd/system/owl-terminal.service /etc/systemd/system/owl-apriltag.service
-systemctl enable owl-terminal.service owl-apriltag.service
+chmod 755 *.service *.timer
+mv *.service *.timer /etc/systemd/system/
+systemctl start owl-net-timer.timer
+systemctl enable owl-net-timer.timer owl-terminal.service owl-apriltag.service
