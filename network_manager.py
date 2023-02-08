@@ -7,7 +7,7 @@ network_status = network_status_list[1].decode('utf-8').strip('\n')
 network_connection = network_status_list[2].decode('utf-8').strip('\n')
 if network_status == "disconnected" and network_connection != "Hotspot":
     hotspot_check = subprocess.Popen(" nmcli c show | grep \"Hotspot\" | awk '{print $1}'", shell=True, stdout=subprocess.PIPE).stdout.readline().decode('utf-8').strip('\n')
-    if hotspot_check is not None:
+    if hotspot_check != "":
         os.system("nmcli c up Hotspot")
     else:
         ssid = "owl_" + network_device.strip("wlx")
