@@ -2,8 +2,8 @@
 Description=Run Owl Network Timer
 
 [Timer]
-OnBootSec=15sec
-OnUnitActiveSec=20sec
+OnBootSec=10sec
+OnUnitActiveSec=10sec
 
 [Install]
 WantedBy=timers.target

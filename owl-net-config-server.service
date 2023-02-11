@@ -1,0 +1,13 @@
+[Unit]
+Description=Owl Network Configure Server
+
+[Service]
+User=root
+ExecStart=/usr/local/bin/uvicorn /etc/owl/net-server/main:app --reload
+Type=idle
+KillMode=control-group
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+Alias=owl-network.service
