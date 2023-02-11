@@ -3,7 +3,7 @@ import subprocess
 import json
 import requests
 
-server_status = subprocess.Popen("systemctl status owl-network.service | grep Active | awk '${print $2}'", shell=True, stdout=subprocess.PIPE).stdout.readline().decode('utf-8').strip('\n')
+server_status = subprocess.Popen("systemctl status owl-network.service | grep Active | awk '{print $2}'", shell=True, stdout=subprocess.PIPE).stdout.readline().decode('utf-8').strip('\n')
 if server_status == "active":
     info = requests.get('http://localhost:8000/api/status').json()
     if info['status'] == "disconnected":
