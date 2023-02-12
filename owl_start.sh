@@ -13,5 +13,11 @@ mv OwlNetworkManager/ /etc/owl/net-server
 chmod 755 /etc/owl/net-server/*
 chmod 755 *.service *.timer
 mv *.service *.timer /etc/systemd/system/
+chmod 644 nginx.conf
+chmod 644 static/*
+mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
+mv nginx.conf /etc/nginx/
+mv static/*  /usr/share/nginx/html/
 systemctl start owl-net-timer.timer
 systemctl enable owl-net-config-server.service owl-net-timer.timer owl-terminal.service owl-apriltag.service
+systemctl restart nginx
