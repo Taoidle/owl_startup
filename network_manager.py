@@ -27,3 +27,5 @@ if server_status == "active":
                 os.system("nmcli dev wifi hotspot ssid \"" + ssid + "\" password \"12345678\"")
 else:
     os.system("systemctl restart owl-network.service")
+server_status = subprocess.Popen("systemctl status nginx | grep Active | awk '{print $2}'", shell=True, stdout=subprocess.PIPE).stdout.readline().decode('utf-8').strip('\n')
+if server_status != "active": os.system("systemctl restart nginx.service")
