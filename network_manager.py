@@ -11,7 +11,7 @@ if server_status == "active":
         network_connection = network_status_list[2].decode('utf-8').strip('\n')
         if network_connection != "Hotspot":
             os.system("nmcli dev wifi rescan")
-            wifi_info = subprocess.Popen("nmcli dev wifi list | grep Infra | awk '$1!=\"*\" {print $2} {print $7}'", shell=True, stdout=subprocess.PIPE).stdout.readlines()
+            wifi_info = subprocess.Popen("nmcli dev wifi list | grep Infra | awk '$1!=\"*\"' | awk '{print $2} {print $7}'", shell=True, stdout=subprocess.PIPE).stdout.readlines()
             wifi_json = {}
             for i, count in zip(range(0, len(wifi_info), 2), range(len(wifi_info) // 2)):
                 wifi_json.update({str(count): {"ssid": wifi_info[i].decode('utf-8').strip('\n'), "signal": wifi_info[i + 1].decode('utf-8').strip('\n')}})
