@@ -64,6 +64,15 @@ if __name__ == '__main__':
                 "index_file_of_root": "index.html",
                 "backend_json_string": "{}",
                 "allowFileExtList": "htm html js json jpg jpeg png bmp gif ico svg css"
+            },
+            "wifiCmd": {
+                "enable": "nmcli wifi on",
+                "ap": "nmcli dev wifi hotspot ssid \"<SSID>\" password \"<PWD>\" | cat",
+                "connect": "nmcli dev wifi connect \"<BSSID>\" password \"<PWD>\" | cat",
+                "scan": "nmcli dev wifi list | cat",
+                "showHotspotPassword": "nmcli dev wifi show-password | cat",
+                "getWlanDeviceState": "nmcli dev wifi list ifname \"<DEVICE_NAME>\" | cat",
+                "listWlanDevice": "nmcli dev status | grep \" wifi \""
             }
         }
         with open(CONFIG_PATH, "w", encoding='utf-8') as f:
