@@ -105,6 +105,20 @@ endif (DEBUG_TAG_INFO)
 set(Boost_USE_MULTITHREADED ON)
 find_package(Boost 1.81.0 REQUIRED COMPONENTS system filesystem program_options json log url ${BOOST_THEAD_MODULE} REQUIRED)
 
+if (EnableWebStaticModule)
+    add_definitions(-DEnableWebStaticModule=1)
+    list(APPEND WebStaticModuleFiles
+            src/WebControlService/EmbedWebServer/EmbedWebServer.h
+            src/WebControlService/EmbedWebServer/EmbedWebServer.cpp
+            src/WebControlService/EmbedWebServer/EmbedWebServerSession.h
+            src/WebControlService/EmbedWebServer/EmbedWebServerSession.cpp
+            src/WebControlService/EmbedWebServer/EmbedWebServerTools.h
+            src/WebControlService/EmbedWebServer/EmbedWebServerTools.cpp
+            src/WebControlService/CmdExecute.cpp
+            src/WebControlService/CmdExecute.h
+            src/WebControlService/WebCmdMail.h
+            )
+endif (EnableWebStaticModule)
 
 message(STATUS "Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
 message(STATUS "Boost_LIBRARY_DIRS: ${Boost_LIBRARY_DIRS}")
@@ -115,27 +129,18 @@ add_executable(${ProjectMainName}
         src/main.cpp
         src/CommandService/CommandService.cpp
         src/CommandService/CommandService.h
-        src/WebControlService/EmbedWebServer/EmbedWebServer.h
-        src/WebControlService/EmbedWebServer/EmbedWebServer.cpp
-        src/WebControlService/EmbedWebServer/EmbedWebServerSession.h
-        src/WebControlService/EmbedWebServer/EmbedWebServerSession.cpp
-        src/WebControlService/EmbedWebServer/EmbedWebServerTools.h
-        src/WebControlService/EmbedWebServer/EmbedWebServerTools.cpp
         src/ImageService/ImageProtobufDefine/ImageProtocol/ImageProtocol.pb.h
         src/ImageService/ImageProtobufDefine/ImageProtocol/ImageProtocol.pb.cc
         src/ImageService/protobuf_test.h
         src/ImageService/protobuf_test.cpp
         src/ImageService/ImageService.h
         src/ImageService/ImageService.cpp
-        src/WebControlService/CmdExecute.cpp
-        src/WebControlService/CmdExecute.h
         src/CommandService/SerialController.cpp
         src/CommandService/SerialController.h
         src/ConfigLoader/ConfigLoader.cpp
         src/ConfigLoader/ConfigLoader.h
         src/AsyncCallbackMailbox/AsyncCallbackMailbox.h
         src/CommandService/CmdSerialMail.h
-        src/WebControlService/WebCmdMail.h
         src/ImageService/ImageServiceHttp.cpp
         src/ImageService/ImageServiceHttp.h
         src/ImageService/CameraReader.cpp
@@ -147,8 +152,14 @@ add_executable(${ProjectMainName}
         src/CommandService/CmdServiceHttp.h
         src/CommandService/ProcessJsonMessage.h
         src/Log/Log.cpp
-        src/Log/Log.h)
-
+        src/Log/Log.h
+        src/TimeService/TimeServiceMail.h
+        src/TimeService/TimeService.cpp
+        src/TimeService/TimeService.h
+        src/CommandService/StateReader.cpp
+        src/CommandService/StateReader.h
+        src/CommandService/AirplaneState.cpp
+        src/CommandService/AirplaneState.h)
 
 target_link_libraries(${ProjectMainName} ${CMAKE_THREAD_LIBS_INIT})
 
