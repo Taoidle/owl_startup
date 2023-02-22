@@ -7,6 +7,7 @@ CM_H = 600
 VC_API = "CAP_V4L"
 FRONT_USB = "usb-1c1c000.usb-1"
 CONFIG_PATH = '/etc/owl/owl_terminal_config.json'
+ALGORITHM_PATH = '/etc/owl/algorithm/'
 
 
 def getUsbSerialNum(device: str) -> str:
@@ -59,6 +60,8 @@ if __name__ == '__main__':
             "frontCameraId": 1,
             "cmd_nmcli_path": "nmcli",
             "cmd_bash_path": "/bin/bash",
+            "js_map_calc_file": ALGORITHM_PATH,
+            "js_map_calc_function_name": "calc_map_position",
             "embedWebServer": {
                 "doc_root": "./html",
                 "index_file_of_root": "index.html",
