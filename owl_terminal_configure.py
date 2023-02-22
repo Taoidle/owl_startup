@@ -7,7 +7,7 @@ CM_H = 600
 VC_API = "CAP_V4L"
 FRONT_USB = "usb-1c1c000.usb-1"
 CONFIG_PATH = '/etc/owl/owl_terminal_config.json'
-ALGORITHM_PATH = '/etc/owl/algorithm/'
+ALGORITHM_PATH = '/etc/owl/algorithm/map_calc.js'
 
 
 def getUsbSerialNum(device: str) -> str:
