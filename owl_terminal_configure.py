@@ -14,17 +14,24 @@ def getUsbSerialNum(device: str) -> str:
     return subprocess.Popen("v4l2-ctl -d " + device.strip('\n') + " --info | grep \"Bus info\" | awk '{print $4}'", shell=True,
                             stdout=subprocess.PIPE).stdout.readline().decode('utf-8').strip('\n')
 
+
 def getCameraDevices() -> list:
     video_devices_list = os.popen('ls /dev | grep video').readlines()
-    video_total_devices_num = len(video_devices_list)
     devices_list = []
-    for i in range(len(video_devices_list) - 1):
+    devices_usb_list = []
+    devices_real_list = []
+    for i in range(len(video_devices_list)):
         item_info_1 = getUsbSerialNum('/dev/' + video_devices_list[i].strip('\n'))
         if "usb" in item_info_1:
-            if item_info_1 == getUsbSerialNum('/dev/' + video_devices_list[i + 1]).strip('\n') and str('/dev/video' + str(i)) not in devices_list: devices_list.append('/dev/video' + str(i))
-            else:
-                if 0 <= i - 1 < video_total_devices_num and getUsbSerialNum('/dev/' + video_devices_list[i - 1]).strip('\n') == item_info_1 and str('/dev/video' + str(i + 1)) not in devices_list: devices_list.append('/dev/video' + str(i + 1))
-    return devices_list
+            devices_list.append('/dev/video' + str(i))
+            devices_usb_list.append(item_info_1)
+    if devices_usb_list[0] == devices_usb_list[1]:
+        for i in range(0, len(devices_usb_list) - 1, 2):
+            devices_real_list.append(devices_list[i])
+    else:
+        for i in range(len(devices_usb_list),1):
+            devices_real_list.append(devices_list[i])
+    return devices_real_list
 
 
 if __name__ == '__main__':
