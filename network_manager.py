@@ -20,7 +20,12 @@ if server_status == "active":
             f.close()
             hotspot_check = subprocess.Popen("nmcli c show | grep \"Hotspot\" | awk '{print $1}'", shell=True, stdout=subprocess.PIPE).stdout.readline().decode('utf-8').strip('\n')
             if hotspot_check != "":
-                os.system("nmcli c up Hotspot")
+                wifi_info = subprocess.Popen("nmcli c up Hotspot", shell=True, stderr=subprocess.PIPE).stderr.readline().decode('utf-8').strip('\n')
+                if wifi_info != "":
+                    os.system("nmcli c delete Hotspot")
+                    network_device = network_status_list[0].decode('utf-8').strip('\n')
+                    ssid = "owl_" + network_device.strip("wlx")
+                    os.system("nmcli dev wifi hotspot ssid \"" + ssid + "\" password \"12345678\"")
             else:
                 network_device = network_status_list[0].decode('utf-8').strip('\n')
                 ssid = "owl_" + network_device.strip("wlx")
