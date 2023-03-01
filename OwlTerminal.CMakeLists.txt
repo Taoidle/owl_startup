@@ -111,7 +111,7 @@ if (DEBUG_TAG_INFO)
 endif (DEBUG_TAG_INFO)
 
 set(Boost_USE_MULTITHREADED ON)
-find_package(Boost 1.81.0 REQUIRED COMPONENTS system filesystem program_options json log url ${BOOST_THEAD_MODULE} REQUIRED)
+find_package(Boost 1.81.0 REQUIRED COMPONENTS system filesystem program_options json log log_setup url ${BOOST_THEAD_MODULE} REQUIRED)
 
 if (EnableWebStaticModule)
     add_definitions(-DEnableWebStaticModule=1)
