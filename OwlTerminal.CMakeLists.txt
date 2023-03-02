@@ -134,6 +134,7 @@ message(STATUS "Boost_LIBRARIES: ${Boost_LIBRARIES}")
 message(STATUS "Boost_VERSION: ${Boost_VERSION}")
 
 add_executable(${ProjectMainName}
+        src/VERSION/CodeVersion.h
         src/main.cpp
         src/CommandService/CommandService.cpp
         src/CommandService/CommandService.h
@@ -160,9 +161,9 @@ add_executable(${ProjectMainName}
         src/CommandService/CmdServiceHttp.cpp
         src/CommandService/CmdServiceHttp.h
         src/CommandService/ProcessJsonMessage.h
-        src/Log/Log.cpp
-        src/Log/Log.h
-        src/Log/BoostAssertionFailed.cpp
+        src/OwlLog/OwlLog.cpp
+        src/OwlLog/OwlLog.h
+        src/OwlLog/BoostAssertionFailed.cpp
         src/TimeService/TimeServiceMail.h
         src/TimeService/TimeService.cpp
         src/TimeService/TimeService.h
@@ -185,7 +186,9 @@ add_executable(${ProjectMainName}
         src/MapCalc/MapCalc.h
         src/MapCalc/MapCalcMail.h
         src/MapCalc/MapCalcPlaneInfoType.h
-        src/MapCalc/MapCalcPlaneInfoType.cpp)
+        src/MapCalc/MapCalcPlaneInfoType.cpp
+        src/VERSION/ProgramVersion.h
+        src/MemoryBoost.h)
 
 target_link_libraries(${ProjectMainName} ${CMAKE_THREAD_LIBS_INIT} quickjspp)
 
