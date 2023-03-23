@@ -8,9 +8,9 @@ VC_API = "CAP_V4L"
 FRONT_USB = "usb-1c1c000.usb-1"
 CONFIG_PATH = '/etc/owl/owl_terminal_config.json'
 ALGORITHM_PATH = '/etc/owl/algorithm/map_calc.js'
-CAMERA_READ_MAX_MS = 600
-CAMERA_READ_RETRY_MS = 150
-CAMERA_READ_RETRY_TIMES = 2
+CAMERA_READ_MAX_MS = 500
+CAMERA_READ_RETRY_MS = 100
+CAMERA_READ_RETRY_TIMES = 5
 
 def getUsbSerialNum(device: str) -> str:
     return subprocess.Popen("v4l2-ctl -d " + device.strip('\n') + " --info | grep \"Bus info\" | awk '{print $4}'", shell=True,
