@@ -8,7 +8,9 @@ VC_API = "CAP_V4L"
 FRONT_USB = "usb-1c1c000.usb-1"
 CONFIG_PATH = '/etc/owl/owl_terminal_config.json'
 ALGORITHM_PATH = '/etc/owl/algorithm/map_calc.js'
-
+CAMERA_READ_MAX_MS = 600
+CAMERA_READ_RETRY_MS = 150
+CAMERA_READ_RETRY_TIMES = 2
 
 def getUsbSerialNum(device: str) -> str:
     return subprocess.Popen("v4l2-ctl -d " + device.strip('\n') + " --info | grep \"Bus info\" | awk '{print $4}'", shell=True,
@@ -63,8 +65,15 @@ if __name__ == '__main__':
             "camera_2_VideoCaptureAPI": VC_API,
             "camera_2_w": CM_W,
             "camera_2_h": CM_H,
+            "camera_read_max_ms": CAMERA_READ_MAX_MS,
+            "camera_read_retry_ms": CAMERA_READ_RETRY_MS,
+            "camera_read_retry_times": CAMERA_READ_RETRY_TIMES,
             "downCameraId": 2,
             "frontCameraId": 1,
+            "multicast_address": "239.255.0.1",
+            "multicast_port": 30003,
+            "listen_address": "0.0.0.0",
+            "multicast_interval_seconds": 15,
             "cmd_nmcli_path": "nmcli",
             "cmd_bash_path": "/bin/bash",
             "js_map_calc_file": ALGORITHM_PATH,
@@ -99,6 +108,10 @@ if __name__ == '__main__':
             json_data["camera_2_VideoCaptureAPI"] = VC_API
             json_data["camera_2_w"] = CM_W
             json_data["camera_2_h"] = CM_H
+            json_data["camera_read_max_ms"] = CAMERA_READ_MAX_MS,
+            json_data["camera_read_retry_ms"] = CAMERA_READ_RETRY_MS,
+            json_data["camera_read_retry_times"] = CAMERA_READ_RETRY_TIMES,
+            json_data["js_map_calc_file"] = ALGORITHM_PATH
         with open(CONFIG_PATH, 'w', encoding='utf-8') as fw:
             json.dump(json_data, fw, ensure_ascii=False)
         fw.close()
