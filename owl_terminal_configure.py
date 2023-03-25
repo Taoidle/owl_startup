@@ -78,6 +78,7 @@ if __name__ == '__main__':
             "cmd_bash_path": "/bin/bash",
             "js_map_calc_file": ALGORITHM_PATH,
             "js_map_calc_function_name": "calc_map_position",
+            "disable_multicast": 0,
             "embedWebServer": {
                 "doc_root": "./html",
                 "index_file_of_root": "index.html",
