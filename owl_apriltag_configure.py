@@ -28,7 +28,7 @@ if __name__ == '__main__':
             "configGetImage": {
                 "host": "127.0.0.1",
                 "port": "23331",
-                "target": "/2",
+                "target": "/down?tag=1",
                 "version": 11,
                 "timeoutMs": TIMEOUT_MS
             },
